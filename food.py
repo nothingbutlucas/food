@@ -81,7 +81,7 @@ def drawing():
                              |.........| 
                               |.......| 
       vamo a cocinar master   |.......| 
-                      \       |=======| 
+   algo vegano, obvio \       |=======| 
                        \      |=======| 
                         \    __o)""""::? 
                          \  C__    c)::; 
@@ -166,6 +166,8 @@ def cocinar():
 	for comida in lista_comidas:
 		#print(comida)
 		var = 0
+		noprint = 0
+		nonoprint = 0
 		for ingrediente in comida:
 			#print(ingrediente)
 			if ingrediente in posibilidad:
@@ -176,19 +178,27 @@ def cocinar():
 				else:
 					cantidad = 2
 				if var >= cantidad:
-					nombre = namestr(comida, globals())
-					nombre = nombre[0]
-					nombre = nombre.replace("_", " ")
-					printbarra()
-					new_line()
-					print(f"[+] Podes hacer" + " " + str(nombre) + " " +"con estos ingredientes:" + " " + str(comida))
-					new_line()
-					printbarra()
+					if noprint == 1:
+						pass
+					else:
+						nombre = namestr(comida, globals())
+						nombre = nombre[0]
+						nombre = nombre.replace("_", " ")
+						printbarra()
+						new_line()
+						print(f"[+] Podes hacer" + " " + str(nombre) + " " +"con estos ingredientes:" + " " + str(comida))
+						new_line()
+						printbarra()
+						noprint += 1
 				elif var < cantidad:
-					nombre = namestr(comida, globals())
-					nombre = nombre[0]
-					nombre = nombre.replace("_", " ")
-					print(f"[-] NO podes hacer" + " " + str(nombre) + " " +"porque faltan algunos de estos:" + " " + str(comida))
+					if nonoprint == 1:
+						pass
+					else:
+						nombre = namestr(comida, globals())
+						nombre = nombre[0]
+						nombre = nombre.replace("_", " ")
+						print(f"[-] Aun NO podes hacer" + " " + str(nombre) + " " +"porque faltan algunos de estos:" + " " + str(comida))
+						nonoprint += 1
 	menu_principal()
 
 def recetas():
@@ -240,18 +250,18 @@ def ver_ingredientes():
 			else:
 				ingredientes_menu.append(ingrediente)
 	for i in ingredientes_menu:
-		print(i)
+		print("[+]" + " " + i)
 	new_line()
 	printbarra()
 	menu_principal()
 
 def chau():
 	clear()
-	printbarra()
+	#printbarra()
 	new_line()
 	rat()
 	new_line()
-	printbarra()
+	#printbarra()
 	sleep(2)
 	clear()
 	sys.exit()
