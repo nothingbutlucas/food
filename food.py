@@ -13,20 +13,21 @@ print(lista_comidas)'''
 
 #####----- COMIDAS -----#####
 
-sopa_de_arvejas = ["cebolla","arveja","papa"]
+sopa_de_arvejas = ["cebolla", "arveja", "papa"]
 guiso_de_lentejas = ["lenteja", "cebolla", "zanahoria", "papa", "pimiento", "botella de tomate"]
-caldo = ["calabaza","choclo","zanahoria"]
+caldo = ["calabaza", "choclo", "zanahoria"]
 salsa_para_pasta = ["botella de tomate", "cebolla", "pimiento"]
 zapallitos_rellenos = ["zapallito", "cebolla", "pimiento", "soja texturizada"]
 bombas_de_calabaza = ["queso", "calabaza", "pan rallado"]
 milanesas_de_berenjena = ["berenjena", "pan rallado"]
-gaspacho = ["pepino","tomate","pimiento","cebolla","ajo"]
-empanadas_fatai = ["soja texturizada", "cebolla","pimiento","papa","tomate","aceituna"]
-empanadas_de_papa = ["tapa de empanda","cebolla","papa", "aceituna","queso"]
+gaspacho = ["pepino", "tomate", "pimiento", "cebolla", "ajo"]
+empanadas_fatai = ["soja texturizada", "tapas de empanada"]
+empanadas_de_papa = ["tapa de empanda", "cebolla", "papa", "aceituna","queso"]
 tarta_de_zapallito = ["zapallito", "cebolla"]
-tarta_de_calabaza_y_tofu = ["tofu","calabaza","tapa de tarta","queso","cebolla"]
+tarta_de_calabaza_y_tofu = ["tofu", "calabaza", "tapa de tarta", "queso", "cebolla"]
 milanesa_de_soja = ["poroto de soja", "harina integral", "pan rallado"]
-
+babaganush = ["berenjena", "especias"]
+croquetas_de_arroz = ["arroz", "zapallito", "cebolla", "curry"]
 
 #####----- LISTADO -----#####
 
@@ -43,7 +44,8 @@ empanadas_fatai,
 empanadas_de_papa,
 tarta_de_zapallito,
 tarta_de_calabaza_y_tofu,
-milanesa_de_soja
+milanesa_de_soja,
+babaganush
 
 ]
 
