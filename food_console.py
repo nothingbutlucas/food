@@ -262,6 +262,7 @@ def menu_principal():
 	else:
 		print("Elegiste cualquier cosa")
 		sleep(3)
+		clear()
 		menu_principal()
 
 
