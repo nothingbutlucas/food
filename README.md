@@ -2,7 +2,7 @@
 
 La app de comidas!
 
-Elegi que podes cocinar basandote en los ingredientes que tengas disponibles en tu casa!
+Elegi que podes cocinar basandote en los ingredientes que tengas disponibles!
 
 # Instalación
 
