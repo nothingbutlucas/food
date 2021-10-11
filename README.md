@@ -14,7 +14,7 @@ Choose what you can cook based on the ingredients you have available!
 
 ![imagen de una consola donde se ve el programa food.py ejecutandose](https://github.com/lucaslucasprogram/food/blob/main/pic01.png)
 
-![imagen de una consola donde se ve el programa food.py ejecutandose](https://github.com/lucaslucasprogram/food/blob/main/pic02.png)
+![imagen de una consola donde se ve el programa food.py ejecutandose](https://github.com/lucaslucasprogram/food/blob/main/pic03.png)
 
 # Instalación | Installation
 
