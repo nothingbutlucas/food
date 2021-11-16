@@ -1,83 +1,59 @@
 from os import system, name
-from time import sleep
 import sys
 import requests
+from draws import *
 
-'''lista = open('lista.txt', 'r')
-lista_comidas = []
 
-for i in lista:
-	lista_comidas.append(i)
-	
-print(lista_comidas)'''
+#####----- CONSTANTES -----#####
 
-#####----- COMIDAS -----#####
-
-sopa_de_arvejas = ["cebolla", "arveja", "papa"]
-guiso_de_lentejas = ["lenteja", "cebolla", "zanahoria", "papa", "pimiento", "botella de tomate"]
-caldo = ["calabaza", "choclo", "zanahoria"]
-salsa_para_pasta = ["botella de tomate", "cebolla", "pimiento"]
-zapallitos_rellenos = ["zapallito", "cebolla", "pimiento", "soja texturizada"]
-bombas_de_calabaza = ["queso", "calabaza", "pan rallado"]
-milanesas_de_berenjena = ["berenjena", "pan rallado"]
-gaspacho = ["pepino", "tomate", "pimiento", "cebolla", "ajo"]
-empanadas_fatai = ["soja texturizada", "tapa de empanada"]
-empanadas_de_papa = ["tapa de empanada", "cebolla", "papa", "aceituna","queso"]
-tarta_de_zapallito = ["zapallito", "cebolla"]
-tarta_de_calabaza_y_tofu = ["tofu", "calabaza", "tapa de tarta", "queso", "cebolla"]
-milanesa_de_soja = ["poroto de soja", "harina integral", "pan rallado"]
-babaganush = ["berenjena", "especias"]
-croquetas_de_arroz = ["arroz", "zapallito", "cebolla", "curry"]
-bombas_de_papa = ["papa", "pan rallado", "queso"]
-salsa_de_hongos = ["hongo", "cebolla morada", "leche", "maicena", "agua"]
-sorrentinos_rellenos = ["masa", "hongo", "cebolla morada", "nuez"]
-empanadas_de_batata = ["batata", "cebolla", "queso", "aceituna negra"]
-croquetas_de_porotos_negros = ["harina de arroz", "poroto negro", "tomate", "cebolla", "morron rojo"]
-milanesas_de_pencas = ["penca", "harina de garbanzo", "pan rallado"]
-
-#####----- LISTADO -----#####
-
-lista_comidas = [
-sopa_de_arvejas,
-guiso_de_lentejas,
-caldo,
-salsa_para_pasta,
-zapallitos_rellenos,
-bombas_de_calabaza,
-milanesas_de_berenjena,
-gaspacho,
-empanadas_fatai,
-empanadas_de_papa,
-tarta_de_zapallito,
-tarta_de_calabaza_y_tofu,
-milanesa_de_soja,
-babaganush,
-bombas_de_papa,
-salsa_de_hongos
-
-]
+EXIT = ["exit", "quit", "salir", "q", "e"]
+MENU = ["menu", "menu principal", "'menu'"]
+DIBUJO = ["draw", "dibujo", "ver dibujo"]
+#LINK_API = "https://plant-base-food-api.herokuapp.com"
+LINK_API = "http://localhost:8000"
 
 #####---- DEFINIR FUNCIONES ----#####
 
 
 def clima():
 	new_line()
-	printbarra()
-	r = requests.get('http://es.wttr.in/BuenosAires?0')
-	x = r.text
-	print(x)
-	if "Soleado" in x or "Despejado" in x:
-		print("Lindo día para cocinar!")
-	else:
-		print("El sol esta sobrevalorado!")
+	# printbarra()
+	try:
+		r = requests.get('http://es.wttr.in/BuenosAires?0')
+		x = r.text
+		print(x)
+		if "Soleado" in x or "Despejado" in x:
+			print("Lindo día para cocinar! | Great day for cooking!")
+		else:
+			print("El sol esta sobrevalorado! | The sun is overrated!")
+	except:
+		print("Hi :) | Hola :)\n")
+
+
+def capture_foods():
+	foods = requests.get(f"{LINK_API}/foods")
+	foods = foods.json()
+	return (foods)
+
+
+def capture_recipes():
+	recipes = requests.get(f"{LINK_API}/foods/recipes")
+	recipes = recipes.json()
+	all_recipes = list()
+	for recipe in recipes:
+		recipe = recipe.replace("-", " ")
+		all_recipes.append(recipe)
+	return all_recipes
+
+
+def capture_food_id(user_input):
+	food = requests.get(f"{LINK_API}/foods/id/{user_input}")
+	food = food.json()
+	return (food)
 
 
 def namestr(obj, namespace):
 	return [name for name in namespace if namespace[name] is obj]
-
-
-def new_line():
-	print("\n")
 
 
 def clear():
@@ -89,168 +65,119 @@ def clear():
 		_ = system('clear')
 
 
-def drawing():
-	drawing='''
-                            _          _ 
-                           (c)___c____(c) 
-                            \ ........../ 
-                             |.........| 
-                              |.......| 
-      vamo a cocinar master   |.......| 
-   algo vegano, obvio \       |=======| 
-                       \      |=======| 
-                        \    __o)""""::? 
-                         \  C__    c)::; 
-                          \___ >--   ::     /\ 
-                               (____/      /__\ 
-                               } /""|      |##| 
-                    __/       (|V ^ )\     |##| 
-                    o | _____/ |#/ / |     |##| 
-           @        o_|}|_____/|/ /  |     |##| 
-                          _____/ /   |     ~!!~ 
-              ======ooo}{|______)#   |     /`'\ 
-          ~~~~ ;    ;          ###---|8     "" 
-        ____;_____;____        ###====     /:|\ 
-       (///0///@///@///)       ###@@@@| 
-       |~~~~~~~~~~~~~~~|       ###@@@@| 
-        \             /        ###@@@@|               + 
-         \___________/         ###xxxxx      /\      // 
-           H H   H  H          ###|| |      /  \    // 
-           H H   H  H           | || |     /____\  /~_^_ 
-           H H   H  H           C |C |     _|@@|_ /__|#|_ 
-           H H   H  H            || ||    /_|@@|_/___|#|/| 
- v    \/   H(o) (o) H            || ::   |:::::::::::::|#| 
- ~    ~~  (o)      (o)        Ccc__)__)  |::::::::::::#| 
-  \|/      ~   @* & ~                    |:::::::::::::|/  \|/ 
-   ~           \|/        !!        \ !/  ~~~~~~~~~~~~~    ~~~ 
-               ~~~        ~~         ~~           ~~ 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ '''
-	new_line()
-	print(drawing)
-	new_line()
-
-
-def rat():
-	print("  ,,==.                      (bai)")
-	print(" //    `                      /")
-	print("||      ,--~~~~-._ _(\--,_   /")
-	print(" \\._,-~   \      '    *  `o ")
-	print("  `---~\( _/,___( /_/`---~~")
-	print("        ``==-    `==-,")
-
-
-def printbarra():
-	print("="*50)
-
-
-def printequis():
-	print("Xx"*25)
-
-
-def printflorcitas():
-	print("*"*50)
-
-
 def bienvenida():
 	clima()
-	printbarra()
-	print("Vamos a comer algo!")
+	# printbarra()
+	print("Vamos a cocinar algo! | Let's cook something!")
 	new_line()
-	print("creado por lucasuait          2021-CopyLeft")
-	printbarra()
+	print("creado por devycoso | created by devycoso  <- 2021 - CopyPaste")
+	# printbarra()
 
 
 def cocinar():
-	clear()
-	#print(lista_comidas)
-	drawing()
-	sleep(3)
-	clear()
+	printflorcitas()
+	print("COCINAR | COOK")
+	new_line()
+	print(f"Recorda ingresar los ingredientes en singular y separados por una coma :) | Remember to enter the ingredients in the singular and separated by a comma :)")
+	new_line()
+	print("creado por devycoso | created by devycoso  <- 2021 - CopyPaste")
 	printflorcitas()
 	new_line()
-	print(f"Recorda ingresar los ingredientes en singular\nseparados por una coma y sin espacio")
-	new_line()
-	print("creado por lucasuait          2021")
-	printflorcitas()
-	new_line()
-	ingredientes = []
-	ingredientes = input("Escribi los ingredientes que vayas a usar: ")
-	if ingredientes == "exit":
-		clear()
-		menu_principal()
-	elif ingredientes == "dibujo":
-		drawing()
-		sleep(10)
-		menu_principal()
+	ingredientes = input("Escribi los ingredientes que vayas a usar ó 'menu' para volver al menu | Write the ingredients you are going to use or 'menu' to return to the menu: ")
 
+	if ingredientes.strip() in MENU:
+		menu_principal()
 	posibilidad = ingredientes.split(",")
+	posibility = list()
+	for ingredient in posibilidad:
+		ingredient = ingredient.strip()
+		posibility.append(ingredient)
+	# clear()
 
-	clear()
-	for comida in lista_comidas:
-		#print(comida)
-		var = 0
-		noprint = 0
-		nonoprint = 0
-		for ingrediente in comida:
-			#print(ingrediente)
-			if ingrediente in posibilidad:
-				#print(ingrediente)
-				var += 1
-				if len(comida) >= 3:
-					cantidad = len(comida) - 1
-				else:
-					cantidad = 2
-				if var >= cantidad:
-					if noprint == 1:
-						pass
-					else:
-						nombre = namestr(comida, globals())
-						nombre = nombre[0]
-						nombre = nombre.replace("_", " ")
-						printbarra()
-						new_line()
-						print(f"[+] Podes hacer" + " " + str(nombre) + " " +"con estos ingredientes:" + " " + str(comida))
-						new_line()
-						printbarra()
-						noprint += 1
-				elif var < cantidad:
-					if nonoprint == 1:
-						pass
-					else:
-						nombre = namestr(comida, globals())
-						nombre = nombre[0]
-						nombre = nombre.replace("_", " ")
-						print(f"[-] Aun NO podes hacer" + " " + str(nombre) + " " +"porque faltan algunos de estos:" + " " + str(comida))
-						nonoprint += 1
-	menu_principal()
+	foods = capture_foods()
+	can_cook = list()
+
+	# print(foods)
+	# print(foods.get('0'))
+	# print(foods.get('0').get("name"))
+
+	for x, food in enumerate(foods):
+		food = foods[str(x)]["name"] + " " + str(foods[str(x)]["main-ingredients"]) + " " + str(foods[str(x)]["secondary-ingredients"])
+		main_ingredients = foods[str(x)]["main-ingredients"]
+		have_ingredient = list()
+		for ingredient in main_ingredients:
+			if ingredient in posibility:
+				have_ingredient.append(ingredient)
+			if len(have_ingredient) == len(main_ingredients):
+				can_cook.append("[ + ] Puedes cocinar | U can cook:")
+				can_cook.append("  |  ")
+				can_cook.append("  --" + str(food).replace("-", " "))
+				can_cook.append("\n")
+	new_line()
+	for x in can_cook:
+		print(x)
+
+	if len(can_cook) <= 0:
+		print(f"No puedes cocinar nada de lo que tengo disponible con {str(posibility)} :(")
+		new_line()
+		print(f"You can't cook anything I have available with {str(posibility)} :(")
+	new_line()
+	cocinar()
 
 
 def recetas():
-	clear()
-	printbarra()
+	# clear()
+	# printbarra()
 	new_line()
-	for comida in lista_comidas:
-		nombre = namestr(comida, globals())
-		nombre = nombre[0]
-		nombre = nombre.replace("_", " ")
-		print("[+]"+ " " + str(nombre))
+	recipes = capture_recipes()
+	for n, recipe in enumerate(recipes):
+		recipe = f"[ {n} ] - {recipe}"
+		print(recipe)
 	new_line()
-	printbarra()
+	print("[ 999 ]" + " " + "Volver al menu principal")
 	new_line()
-	menu_principal()
+
+	input_user = input("Elegi | Choose: ")
+	new_line()
+	print("[ N ] -> Nombre | Name")
+	print("[ M/P ] -> Main ingredient | Ingrediente principal")
+	print("[  S  ] -> Secondary ingredient | Ingrediente secundario")
+
+	if input_user.strip() == "999":
+		return menu_principal()
+	else:
+		try:
+			food = capture_food_id(int(input_user.strip()))
+			name = (food["name"]).replace("-", " ")
+			new_line()
+			print("[  N  ] -> " + name)
+			for ingredient in food["main-ingredients"]:
+				print(f"[ M/P ] --> {ingredient}")
+			for ingredient in food["secondary-ingredients"]:
+				print(f"[  S  ] --> {ingredient}")
+		except KeyError:
+			error = capture_food_id(int(input_user.strip()))
+			error = error["detail"][0]["msg"]
+			new_line()
+			print("Error: " + error)
+		except Exception:
+			print("Ups, no se que, pero algo salío mal :( | Ups, i don't know what, but something when wrong :(")
+		return menu_principal()
 
 
 def menu_principal():
 	new_line()
-	print("Presiona 1 para ver todos los ingredientes")
+	print("[ 1 ] Ver todos los ingredientes | See all the ingredients")
 	new_line()
-	print("Presiona 2 para ver las recetas")
+	print("[ 2 ] Ver las comidas | See all the meals")
 	new_line()
-	print("Presiona 3 para ver que podes cocinar")
+	print("[ 3 ] Ver que podes cocinar | See what u can cook")
 	new_line()
-	print("Presiona 4 para salir")
+	print("[ 4 ] Para salir | Exit")
 	new_line()
-	eleccion = input("Elegi 1, 2, 3 o 4: ")
+	eleccion = input("Elegi | Choose 1, 2, 3 o 4: ")
+	new_line()
+	eleccion = eleccion.strip()
 	if eleccion == "1":
 		ver_ingredientes()
 	elif eleccion == "2":
@@ -260,42 +187,33 @@ def menu_principal():
 	elif eleccion == "4":
 		chau()
 	else:
-		print("Elegiste cualquier cosa")
-		sleep(3)
+		print("Elegiste cualquier cosa, usa los numeros")
 		menu_principal()
 
 
 def ver_ingredientes():
-	clear()
-	printbarra()
-	new_line()
 	ingredientes_menu = []
-	for comida in lista_comidas:
-		for ingrediente in comida:
-			if ingrediente in ingredientes_menu:
-				pass
-			else:
-				ingredientes_menu.append(ingrediente)
-	for i in ingredientes_menu:
-		print("[+]" + " " + i)
-	new_line()
-	printbarra()
+	foods = capture_foods()
+	for x, food in enumerate(foods):
+		ingredients = foods[str(x)]["main-ingredients"] + foods[str(x)]["secondary-ingredients"]
+		for ingredient in ingredients:
+			if ingredient not in ingredientes_menu:
+				ingredientes_menu.append(ingredient)
+
+	for ingredient in ingredientes_menu:
+		print("[ + ]" + " " + str(ingredient))
+
 	menu_principal()
 
 
 def chau():
-	clear()
-	#printbarra()
 	new_line()
 	rat()
 	new_line()
-	#printbarra()
-	sleep(2)
-	clear()
 	sys.exit()
+
 
 #####---- Inicio del programa ----#####
 
-clear()
 bienvenida()
 menu_principal()
