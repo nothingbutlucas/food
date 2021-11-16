@@ -9,8 +9,8 @@ from draws import *
 EXIT = ["exit", "quit", "salir", "q", "e"]
 MENU = ["menu", "menu principal", "'menu'"]
 DIBUJO = ["draw", "dibujo", "ver dibujo"]
-#LINK_API = "https://plant-base-food-api.herokuapp.com"
-LINK_API = "http://localhost:8000"
+LINK_API = "https://plant-base-food-api.herokuapp.com"
+#LINK_API = "http://localhost:8000"
 
 #####---- DEFINIR FUNCIONES ----#####
 
@@ -187,13 +187,7 @@ def menu_principal():
 	elif eleccion == "4":
 		chau()
 	else:
-<<<<<<< HEAD
 		print("Elegiste cualquier cosa, usa los numeros")
-=======
-		print("Elegiste cualquier cosa")
-		sleep(3)
-		clear()
->>>>>>> a4bdf7484c54b07ebb681522a17ed7403573e6c7
 		menu_principal()
 
 

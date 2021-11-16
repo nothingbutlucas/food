@@ -22,6 +22,13 @@ No se instala! Podes ejecutar el .exe o el .py
 
 Does not require installation! You can run the .exe or .py
 
+    Windows: python food_console.py
+    Linux: python3 food_console.py
+
+Si lo anterior tira algún error, probablemente tengas que instalar python, usa este link -> http://shrtco.de/Z4HCjV
+
+If the above throws an error, you probably have to install python, use this link -> http://shrtco.de/Z4HCjV
+
 # Comentarios y sugerencias | Comments and suggests
 
-food-app@telegmail.com
+devycoso@gmail.com
